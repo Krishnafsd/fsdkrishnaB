@@ -1,31 +1,68 @@
-import{useState} from "react";
-import "./App.css";
-function App(){
-  const[list,setList]=useState([]);
-  const[value,setValue]=useState("");
-  const addToList=()=>{
-    let tempArr=list;
-    tempArr.push(value);
-    setList(tempArr);
-    setValue("");
-  };
-  const deleteItem=(index)=>{
-    let temp=list.filter((item,i)=> i !== index);
-    setList(temp);
-  };
-  return(
-    <div className="App">
-      <fieldset>
-        <h>Add product to list</h><br></br>
-        <input type="text" value={value} onChange={(e)=>setValue(e.target.value)}/>
-        <button onClick={addToList}>click to add</button><br></br><br></br>
-        <h>product catalog</h><br></br>
-        <ol>
-          {list.map((item,i)=> <li onClick={()=>deleteItem(i)}>{item}</li>)}
-        </ol>
-        <h>click on product to delete</h><br></br>
-      </fieldset>
-    </div>
-  );
+import{useState} from 'react';
+import './App.css';
+export default function Form()
+{
+    const[name,setName]=useState("");
+    const[email,setEmail]=useState("");
+    const[password,setPassword]=useState("");
+    const[submitted,setSubmitted]=useState(false);
 
-}export default App;
+    const handleName=(e)=>{
+        setName(e.target.value);
+    };
+
+    const handleEmail=(e)=>{
+        setEmail(e.target.value);
+    };
+
+    const handlePassword=(e)=>{
+        setPassword(e.target.value);
+    };
+
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        if(name===''|| email===''||password===''){
+        alert("please enter all the fields");
+    } else {
+        setSubmitted(true);
+    }
+};
+const successMessage=()=>{
+    if(submitted)
+    return(
+        <div className="success">
+            <h1>User{name} successfully registered!!</h1>
+        </div>
+    );
+};
+return(
+    <div className="form">
+        <div>
+            <h1>User registration</h1>
+        </div>
+        {/*Calling to the methods*/}
+        <div className="messages">
+            {successMessage()}
+        </div>
+
+        <form>
+            <fieldset>
+                {/*Labels and input for form data*/}
+                <label className="label">name</label>
+                <input onChange={handleName} className="input" value={name} type="text"/><br>
+                </br>
+                <label className="label">Email</label>
+                <input onChange={handleEmail} className="input" value={email} type="email"/><br>
+                </br>
+                <label className="label">password</label>
+                <input onChange={handlePassword} className="input" value={password} type="password"/><br>
+                </br>
+                <button onClick={handleSubmit} className="btn" type="submit">
+                    submit</button> 
+            </fieldset>
+        </form>
+    </div>
+    
+);
+
+}
