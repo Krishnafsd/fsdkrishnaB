@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>valid</title>
+    </head>
+    <body>
+        <form>
+            your Name:<p id="name"></p><br>
+            your Email:<p id="email"></p><br>
+    
+        <script>
+            document.getElementById("name").innerHTML=localStorage.getItem("name");
+            document.getElementById("email").innerHTML=localStorage.getItem("email");
+        </script>
+        </form>
+    </body>
+</html>
